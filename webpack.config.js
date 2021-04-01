@@ -1,11 +1,15 @@
 const webpack = require('webpack');
+const glob = require('glob');
 const path = require('path');
 const RemovePlugin = require('remove-files-webpack-plugin');
 
 const buildPath = path.resolve(__dirname, 'dist');
 
+const serverFiles = glob.sync("./src/server/*.ts");
+const clientFiles = glob.sync("./src/client/*.ts");
+
 const server = {
-  entry: './src/server/server.ts',
+  entry: serverFiles,
   module: {
     rules: [
       {
@@ -44,7 +48,7 @@ const server = {
 };
 
 const client = {
-  entry: './src/client/client.ts',
+  entry: clientFiles,
   module: {
     rules: [
       {
